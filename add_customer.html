@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>Add New Customer</title>
+	</head>
+	<body>
+		<h1>Pizza Kitchen</h1>
+		<h2>Add New Customer</h2>
+		<form method="post" action="processcustomer.cgi">
+			<table>
+				<tr>
+					<th>First Name</th>
+					<td><input type="text" name="first" placeholder="e.g. John"/></td>
+				</tr>
+				<tr>
+					<th>Last Name</th>
+					<td><input type="text" name="last" placeholder="e.g. Bain"/></td>
+				</tr>
+				<tr>
+					<th>Street Address</th>
+					<td><input type="text" name="street" placeholder="e.g. 5 Ormond Avenue"/></td>
+				</tr>
+				<tr>
+					<th>Town</th>
+					<td><input type="text" name="town" placeholder="e.g. Dunkeld"/></td>
+				</tr>
+				<tr>
+					<th>Post Code</th>
+					<td><input type="text" name="postcode" placeholder="e.g. PH15 2LK"/></td>
+				</tr>
+				<tr>
+					<th>E-Mail</th>
+					<td><input type="email" name="email" placeholder="e.g. john@bain.com"/></td>
+				</tr>
+			</table>
+			<input type="submit" name="submit" value="Add New Customer"/>
+		</form>
+	</body>
+</html>
