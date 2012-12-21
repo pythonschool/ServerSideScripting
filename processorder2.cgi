@@ -54,7 +54,7 @@ def calculate_total_order_cost(costs):
 		total_cost += each[3]
 	return total_cost
 		
-def create_form(db,cursor,costs):
+def create_form(db,cursor,costs,quantity):
 	form = """<form method="post" action="processorder3.cgi"/>
 			<table>
 				<tr>
@@ -99,6 +99,7 @@ def create_form(db,cursor,costs):
 			"""
 	
 	form += """<input type="submit" name="submit" value="Delivery Confirmation"/>"""
+	form += """<input type="hidden" name="quantity" value="{0}"/>""".format(quantity)
 	form += "</form>"
 	return form
 
@@ -110,7 +111,8 @@ if __name__ == "__main__":
 		quantities = calculate_pizza_quantities(pizzas)
 		db,cursor = connect_pizza_database()
 		costs = calculate_pizza_costs(db,cursor,quantities)
-		form = create_form(db,cursor,costs)
+		num_pizza_types = len(costs)
+		form = create_form(db,cursor,costs,num_pizza_types)
 		print("<h1>Pizza Kitchen</h1>")
 		print("<h2>Order Summary</h2>")
 		print("<p>You have selected the following</p>")
