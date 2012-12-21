@@ -76,4 +76,5 @@ if __name__ == "__main__":
     pizza_list = create_existing_pizza_list(pizzas)
     print(pizza_list)
     html_tail()
+    cursor.close()
 

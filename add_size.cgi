@@ -59,4 +59,5 @@ if __name__ == "__main__":
     new_form = create_size_form()
     print(new_form)
     html_tail()
+    cursor.close()
 
