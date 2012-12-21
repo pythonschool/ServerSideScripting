@@ -19,7 +19,7 @@ def create_size_form():
                       </tr>
                       <tr>
                           <td><input type="text" name="inches" placeholder="e.g. 12"/></td>
-                          <td><input type="number" min="1" max="6" step="0.1"/></td>
+                          <td><input type="number" name="cost" min="1" max="6" step="0.1"/></td>
                       </tr>
                   </table>
                   <input type="submit" name="submit" value="Add new size"/>

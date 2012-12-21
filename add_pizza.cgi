@@ -19,7 +19,7 @@ def create_pizza_form():
                       </tr>
                       <tr>
                           	<td><input type="text" name="pizza" placeholder="e.g. Hawaiian"/></td>
-                          	<td><input type="number" min="1" max="6" step="0.1"/></td>
+                          	<td><input type="number" name="cost" min="1" max="6" step="0.1"/></td>
                       </tr>
                       <tr>
                       		<td colspan="2">Description</td>
