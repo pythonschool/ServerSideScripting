@@ -10,12 +10,30 @@ def process_form(form_data):
 		pizza = form_data.getvalue("pizza{0}".format(each))
 		size = form_data.getvalue("size{0}".format(each))
 		num = form_data.getvalue("quantity{0}".format(each))
-		cost = form_data.getvalue("cost{0}".format(each))
-		pizzas.append((pizza,size,num,cost))
+		pizzas.append((pizza,size,num))
 	date = form_data.getvalue("date")
 	time = form_data.getvalue("time")
 	customer = form_data.getvalue("customer")
-	return quantity, pizzas, cost,date, time, customer
+	return quantity, pizzas, date, time, customer
+	
+def add_new_order(db,cursor,quantity, pizzas, date, time, customer):
+	sql = """insert into customer_order(date,delivery_time,customer_id) values
+			('{0}','{0} {1}:00','{2}')""".format(date,time,customer)
+	cursor.execute(sql)
+	db.commit()
+	
+	sql = """select order_id from customer_order where customer_id='{0}' order by order_id desc limit 1""".format(customer)
+	cursor.execute(sql)
+	order_id = cursor.fetchone()
+	order_id = order_id[0]
+	
+	for each in pizzas:
+		sql = """insert into order_item(order_id,pizza_id,inches,quantity) values
+				('{0}','{1}','{2}','{3}')""".format(order_id,each[0],each[1],each[2])
+		cursor.execute(sql)
+	db.commit()
+	
+	return order_id
 	
 def get_customer_details(db,cursor,customer_id):
 	sql = "select * from customer where customer_id='{0}'".format(customer_id)
@@ -101,17 +119,15 @@ def create_form(db, cursor, quantity, pizzas, date, time, customer_id):
 
 if __name__ == "__main__":
 	try:
-		html_top("Delivery Confirmation")
+		html_top("Order Confirmation")
 		form_data = cgi.FieldStorage()
-		quantity, pizzas, cost,date, time, customer = process_form(form_data)
+		quantity, pizzas, date, time, customer = process_form(form_data)
 		db,cursor = connect_pizza_database()
-		customer_details = get_customer_details(db,cursor,customer)
-		confirmation = create_confirmation(quantity, pizzas, cost, date, time, customer_details)
-		form = create_form(db, cursor, quantity, pizzas, date, time, customer)
+		order_id = add_new_order(db,cursor,quantity, pizzas, date, time, customer)
 		print("<h1>Pizza Kitchen</h1>")
-		print("<h2>Delivery Confirmation</h2>")
-		print(confirmation)
-		print(form)
+		print("<h2>Order Confirmation</h2>")
+		print("<p>Thank you for your order! Your order number is: {0}</p>".format(order_id))
+		print("""<p><a href="new_order.html">Another Order?</a></p>""")
 	except:
 		cgi.print_exception()
 		
