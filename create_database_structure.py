@@ -14,7 +14,8 @@ def create_pizza(db,cursor):
              name varchar(50) not null,
              description varchar(50) not null,
              cost decimal(5,2),
-             primary key(pizza_id))"""
+             primary key(pizza_id))
+             engine=INNODB"""
     cursor.execute(sql)
     db.commit()
 
@@ -22,7 +23,8 @@ def create_size(db,cursor):
     sql = """create table size(
              inches int not null,
              cost decimal(5,2),
-             primary key(inches))"""
+             primary key(inches))
+             engine=INNODB"""
     cursor.execute(sql)
     db.commit()
 
@@ -35,7 +37,8 @@ def create_customer(db,cursor):
              town varchar(30) not null,
              post_code varchar(10) not null,
              email_address varchar(30) not null,
-             primary key(customer_id))"""
+             primary key(customer_id))
+             engine=INNODB"""
 
     cursor.execute(sql)
     db.commit()
@@ -48,7 +51,8 @@ def create_customer_order(db,cursor):
              customer_id int not null,
              primary key(order_id),
              foreign key(customer_id) references customer(customer_id)
-             on update cascade on delete restrict)"""
+             on update cascade on delete restrict)
+             engine=INNODB"""
 
     cursor.execute(sql)
     db.commit()
@@ -66,7 +70,8 @@ def create_order_item(db,cursor):
              foreign key(pizza_id) references pizza(pizza_id)
              on update cascade on delete cascade,
              foreign key(inches) references size(inches)
-             on update cascade on delete cascade)"""
+             on update cascade on delete cascade)
+             engine=INNODB"""
 
     cursor.execute(sql)
     db.commit()
