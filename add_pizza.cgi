@@ -14,21 +14,21 @@ def create_pizza_form():
               <form method="post" action="processpizza.cgi">
                   <table>
                       <tr>
-                          	<th>Name</th>
-                          	<th>Cost</th>
+                            <th>Name</th>
+                            <th>Cost</th>
                       </tr>
                       <tr>
-                          	<td><input type="text" name="pizza" placeholder="e.g. Hawaiian"/></td>
-                          	<td><input type="number" name="cost" min="1" max="6" step="0.1"/></td>
+                            <td><input type="text" name="pizza" placeholder="e.g. Hawaiian"/></td>
+                            <td><input type="number" name="cost" min="1" max="6" step="0.1"/></td>
                       </tr>
                       <tr>
-                      		<td colspan="2">Description</td>
+                          <td colspan="2">Description</td>
                       </tr>
                       <tr>
-                      		<td colspan="2">
-                      			<textarea rows="5" cols="60" name="description" placeholder="e.g. this pizza is topped with ham and pineapple">
-                      			</textarea>
-                      		</td>
+                          <td colspan="2">
+                            <textarea rows="5" cols="60" name="description" placeholder="e.g. this pizza is topped with ham and pineapple">
+                            </textarea>
+                          </td>
                       </tr>
                   </table>
                   <input type="submit" name="submit" value="Add new pizza"/>
@@ -41,21 +41,21 @@ def create_existing_pizza_list(pizzas):
 
         for existing in pizzas:
             table = """<table>
-            			<tr>
-                        	<th>Name</th>
-                        	<td>{0}</td>
+                  <tr>
+                          <th>Name</th>
+                          <td>{0}</td>
                         </tr>
                         <tr>
-                        	<th>Description</th>
-                        	<td>
-                        		<textarea rows="5" cols="60">
-                        		{1}
-                        		</textarea>
-                        	</td>
+                          <th>Description</th>
+                          <td>
+                            <textarea rows="5" cols="60">
+                            {1}
+                            </textarea>
+                          </td>
                         </tr>
                         <tr>
-                        	<th>Cost</th>
-                        	<td>{2}</td>
+                          <th>Cost</th>
+                          <td>{2}</td>
                         </tr>
                      </table><br/>""".format(existing[1],existing[2],existing[3])
             pizza_list += table
